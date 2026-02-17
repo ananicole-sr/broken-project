@@ -2,8 +2,6 @@
 let cartTotal = 0;
 let productsData = [];
 
-console.log("DEBUG: API Key interna", "sk_test_51MzQ2..."); 
-
 document.addEventListener('DOMContentLoaded', () => {
     fetchProducts();
     
@@ -38,7 +36,7 @@ function renderProducts(products) {
                 <p class="card-desc">${product.description}</p>
                 <div class="card-price">$${product.price}</div>
             </div>
-            <button class="btn-add" onclick="addToCart('${product.price}')">
+            <button class="btn-add" onclick="addToCart(${product.price})">
                 AGREGAR AL CARRITO
             </button>
         `;
@@ -48,6 +46,8 @@ function renderProducts(products) {
 
 // Función global para el onclick inline
 window.addToCart = (price) => {
+
+
     
     console.log(`Agregando ${price} al carrito...`);
 
@@ -63,9 +63,9 @@ window.addToCart = (price) => {
 };
 
 function filterProducts(e) {
-    const term = e.target.value;
+    const term = (e.target.value);
 
-    const filtered = productsData.filter(p => p.name.includes(term));
+    const filtered = productsData.filter(p => p.name.toLowerCase().includes(term.toLowerCase()));
     
     renderProducts(filtered);
 }

@@ -21,7 +21,7 @@ const products = [
         category: "Monitores",
         price: 450, 
         description: "Colores reales, refresco de 144hz.",
-        image: "/img/monitor-404.jpg" 
+        image: "https://www.hp.com/content/dam/sites/worldwide/personal-computers/consumer/monitors-accessories/computer-monitors-redesign/hp-series-7-pro-34-wqhd-conferencing-monitor-734-pm@2x.jpg" 
     },
     { 
         id: 3, 
@@ -29,7 +29,7 @@ const products = [
         category: "Periféricos",
         price: 150, 
         description: "Switches azules ruidosos.",
-        image: "https://images.unsplash.com/photo-1595225476474-87563907a212?q=80&w=4000&auto=format&fit=crop" // BUG: Imagen de 5MB (Performance)
+        image: "https://images.unsplash.com/photo-1595225476474-87563907a212?q=80&w=4000" // BUG: Imagen de 5MB (Performance)
     },
     { 
         id: 4, 
@@ -51,17 +51,7 @@ app.get('/api/products', (req, res) => {
 
 // API: El developr hizo algo raro aqui, siempre deberia ser success
 app.post('/api/checkout', (req, res) => {
-    const shouldFail = Math.random() > 0.5;
-    setTimeout(() => {
-        if (shouldFail) {
-            res.status(500).json({ 
-                error: "DB_CONNECTION_TIMEOUT", 
-                details: "El pool de conexiones está saturado." 
-            });
-        } else {
-            res.json({ success: true, orderId: "ORD-" + Math.floor(Math.random() * 10000) });
-        }
-    }, 1500);
+    res.json({ success: true, orderId: "ORD-" + Math.floor(Math.random() * 10000) });
 });
 
 const PORT = process.env.PORT || 3000;
